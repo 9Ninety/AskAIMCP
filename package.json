@@ -1,6 +1,6 @@
 {
   "name": "ask-ai-mcp",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A Model Context Protocol server enabling AI-to-AI collaboration across multiple providers.",
   "main": "dist/server.js",
   "type": "module",
@@ -15,6 +15,7 @@
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix",
     "prebuild": "pnpm run clean",
+    "prepublishOnly": "pnpm run build",
     "test": "vitest run"
   },
   "keywords": [
