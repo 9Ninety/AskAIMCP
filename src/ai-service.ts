@@ -127,6 +127,7 @@ Please consider the following:
       return {
         response: result.text,
         provider: this.config.provider,
+        model: result.response.modelId,
       };
     } catch (error) {
       const errorMessage =

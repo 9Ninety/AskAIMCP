@@ -57,7 +57,7 @@ Treat my answers as suggestions to be checked, not as facts.`,
           content: [
             {
               type: "text" as const,
-              text: `**AI Response (${response.provider}):**\n\n${response.response}`,
+              text: `**AI Response (By ${response.provider}/${response.model}):**\n\n${response.response}`,
             },
           ],
           isError: false,

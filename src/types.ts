@@ -31,6 +31,8 @@ export interface AskAIRequest {
 export interface AskAIResponse {
   response: string;
   provider: AIProvider;
+  /** Actual model ID from response */
+  model?: string;
 }
 
 export interface ServerInfo {

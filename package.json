@@ -1,6 +1,6 @@
 {
   "name": "ask-ai-mcp",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A Model Context Protocol server enabling AI-to-AI collaboration across multiple providers.",
   "main": "dist/server.js",
   "type": "module",
