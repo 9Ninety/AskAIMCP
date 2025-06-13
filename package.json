@@ -1,0 +1,57 @@
+{
+  "name": "ask-ai-mcp",
+  "version": "1.0.0",
+  "description": "A Model Context Protocol server enabling AI-to-AI collaboration across multiple providers.",
+  "main": "dist/server.js",
+  "type": "module",
+  "packageManager": "pnpm@9.15.0",
+  "bin": {
+    "ask-ai-mcp": "dist/server.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf dist",
+    "inspect": "pnpm run build && dotenv -- mcp-inspector ./dist/server.js",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "prebuild": "pnpm run clean",
+    "test": "vitest run"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "ai",
+    "llm",
+    "tool-calling"
+  ],
+  "license": "GPL-2.0-only",
+  "dependencies": {
+    "@ai-sdk/anthropic": "^1.2.12",
+    "@ai-sdk/google": "^1.2.19",
+    "@ai-sdk/openai": "^1.3.22",
+    "@modelcontextprotocol/sdk": "^1.12.3",
+    "ai": "^4.3.16",
+    "zod": "^3.25.64"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/inspector": "^0.14.1",
+    "@types/node": "24.0.1",
+    "dotenv-cli": "^8.0.0",
+    "eslint": "9.29.0",
+    "rimraf": "6.0.1",
+    "tsx": "4.20.3",
+    "typescript": "5.8.3",
+    "typescript-eslint": "8.34.0",
+    "vitest": "3.2.3"
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "files": [
+    "dist/**/*.js",
+    "dist/**/*.d.ts",
+    "README.md",
+    "LICENSE",
+    ".env.example"
+  ]
+}
