@@ -18,7 +18,7 @@ export interface AskAIConfig {
   /** Base URL for AI providers */
   baseUrl?: string;
   /** Reasoning effort for reasoning models ('low', 'medium', 'high', 'max', or budget string, e.g. 10000) */
-  reasoningEffort?: string;
+  reasoningEffort?: "low" | "medium" | "high" | string;
 }
 
 export interface AskAIRequest {

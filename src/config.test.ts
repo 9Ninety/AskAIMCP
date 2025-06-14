@@ -55,7 +55,7 @@ describe("Config", () => {
       expect(config.apiKey).toBe("test-key");
       expect(config.temperature).toBe(0.7);
       expect(config.maxTokens).toBe(10000);
-      expect(config.baseUrl).toBe("https://api.example.com");
+      expect(config.baseUrl).toBe("https://api.example.com/v1");
       expect(config.reasoningEffort).toBe("medium");
     });
 

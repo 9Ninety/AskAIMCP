@@ -4,6 +4,10 @@ import { createOpenAI } from "@ai-sdk/openai";
 import { generateText } from "ai";
 import type { AskAIConfig, AskAIRequest, AskAIResponse } from "./types.js";
 
+import type { AnthropicProviderSettings } from "@ai-sdk/anthropic";
+import type { GoogleGenerativeAIProviderSettings } from "@ai-sdk/google";
+import type { OpenAIProviderSettings } from "@ai-sdk/openai";
+
 export class AIService {
   private config: AskAIConfig;
 
@@ -24,16 +28,25 @@ export class AIService {
 
   private getModel() {
     switch (this.config.provider) {
-      case "openai": {
-        const settings: any = {};
+      case "openai":
+      case "openai-compatible": {
+        const settings: OpenAIProviderSettings = {};
+
+        if (this.config.baseUrl) {
+          settings.baseURL = this.config.baseUrl;
+        } else if (this.config.provider === "openai-compatible") {
+          throw new Error(
+            "Base URL is required for OpenAI-compatible providers"
+          );
+        }
+
         if (this.config.apiKey) settings.apiKey = this.config.apiKey;
-        if (this.config.baseUrl) settings.baseURL = this.config.baseUrl;
 
         const openai = createOpenAI(settings);
         return openai(this.config.model);
       }
       case "anthropic": {
-        const settings: any = {};
+        const settings: AnthropicProviderSettings = {};
         if (this.config.apiKey) settings.apiKey = this.config.apiKey;
         if (this.config.baseUrl) settings.baseURL = this.config.baseUrl;
 
@@ -41,7 +54,7 @@ export class AIService {
         return anthropic(this.config.model);
       }
       case "google": {
-        const settings: any = {};
+        const settings: GoogleGenerativeAIProviderSettings = {};
         if (this.config.apiKey) settings.apiKey = this.config.apiKey;
         if (this.config.baseUrl) settings.baseURL = this.config.baseUrl;
 
@@ -49,29 +62,13 @@ export class AIService {
         return google(this.config.model);
       }
       case "perplexity": {
-        // Perplexity uses OpenAI-compatible API
-        const settings: any = {
+        const settings: OpenAIProviderSettings = {
           baseURL: this.config.baseUrl || "https://api.perplexity.ai",
         };
         if (this.config.apiKey) settings.apiKey = this.config.apiKey;
 
         const perplexity = createOpenAI(settings);
         return perplexity(this.config.model);
-      }
-      case "openai-compatible": {
-        if (!this.config.baseUrl) {
-          throw new Error(
-            "Base URL is required for OpenAI-compatible providers"
-          );
-        }
-
-        const settings: any = {
-          baseURL: this.config.baseUrl,
-        };
-        if (this.config.apiKey) settings.apiKey = this.config.apiKey;
-
-        const compatible = createOpenAI(settings);
-        return compatible(this.config.model);
       }
       default:
         throw new Error(`Unsupported provider: ${this.config.provider}`);
@@ -117,9 +114,10 @@ Please consider the following:
         generateOptions.maxTokens = this.config.maxTokens;
       }
 
-      // Add reasoning effort for reasoning models
       if (this.config.reasoningEffort !== undefined) {
-        (generateOptions as any).reasoningEffort = this.config.reasoningEffort;
+        generateOptions.providerOptions = {
+          openai: { reasoningEffort: this.config.reasoningEffort },
+        };
       }
 
       const result = await generateText(generateOptions);
