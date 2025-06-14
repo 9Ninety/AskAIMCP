@@ -18,26 +18,26 @@ async function createServer(): Promise<McpServer> {
 
   server.tool(
     "ask_ai",
-    `Call another AI model for help with a problem, to get a second opinion, or for brainstorming.
+    `Call another AI model for help, a fresh perspective, or brainstorming across technical, creative, research, or strategic topics.
 
 When should you call me?
-- You're stuck on a problem or need help debugging.
-- You're not sure about the best approach or a technical decision.
-- You want a code review or suggestions for improvement.
-- You need new ideas or alternative solutions.
+- You're stuck on a problem or need help debugging or researching.
+- You seek alternative viewpoints on design, planning, or creative work.
+- You want a review or suggestions for improvement (code, writing, strategy, etc.).
+- You need new ideas, inspiration, or broader perspectives.
 
 How to use me for the best results:
-- Put your specific question in the 'question' field.
-- Pack ALL relevant information into the 'context' field in one go. This includes code, error logs, conversation history, requirements, and anything else that would help. Don't make me ask for more details.
+- Put your focused question in the 'question' field.
+- Provide ALL relevant background in the 'context' field at once (code, data, requirements, conversation history, constraints, etc.).
 
 How to phrase your question effectively:
-- Prefer open-ended questions that explain what problem you’re facing and what goal you’re trying to achieve.
-- Avoid adding your own assumptions, guesses, or early conclusions; they may be incorrect and lead both of us down the same dead end.
+- Prefer open-ended questions that explain the issue you face and the goal you aim to achieve.
+- Avoid adding unverified assumptions or early conclusions; they might be wrong and lead both of us astray.
 
 **CRITICAL WARNING:**
 The response comes from another AI. It could be inaccurate or misleading.
-You MUST verify and validate any information, code, or suggestions I provide.
-Treat my answers as suggestions to be checked, not as facts.`,
+You MUST verify any information, code, or suggestions provided.
+Treat the answer as guidance to be checked, not as fact.`,
     {
       question: z
         .string()
