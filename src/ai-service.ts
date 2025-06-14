@@ -1,12 +1,14 @@
 import { createAnthropic } from "@ai-sdk/anthropic";
 import { createGoogleGenerativeAI } from "@ai-sdk/google";
 import { createOpenAI } from "@ai-sdk/openai";
+import { createPerplexity } from "@ai-sdk/perplexity";
 import { generateText } from "ai";
 import type { AskAIConfig, AskAIRequest, AskAIResponse } from "./types.js";
 
 import type { AnthropicProviderSettings } from "@ai-sdk/anthropic";
 import type { GoogleGenerativeAIProviderSettings } from "@ai-sdk/google";
 import type { OpenAIProviderSettings } from "@ai-sdk/openai";
+import type { PerplexityProviderSettings } from "@ai-sdk/perplexity";
 
 export class AIService {
   private config: AskAIConfig;
@@ -62,12 +64,11 @@ export class AIService {
         return google(this.config.model);
       }
       case "perplexity": {
-        const settings: OpenAIProviderSettings = {
-          baseURL: this.config.baseUrl || "https://api.perplexity.ai",
-        };
+        const settings: PerplexityProviderSettings = {};
         if (this.config.apiKey) settings.apiKey = this.config.apiKey;
+        if (this.config.baseUrl) settings.baseURL = this.config.baseUrl;
 
-        const perplexity = createOpenAI(settings);
+        const perplexity = createPerplexity(settings);
         return perplexity(this.config.model);
       }
       default:
