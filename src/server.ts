@@ -30,6 +30,10 @@ How to use me for the best results:
 - Put your specific question in the 'question' field.
 - Pack ALL relevant information into the 'context' field in one go. This includes code, error logs, conversation history, requirements, and anything else that would help. Don't make me ask for more details.
 
+How to phrase your question effectively:
+- Prefer open-ended questions that explain what problem you’re facing and what goal you’re trying to achieve.
+- Avoid adding your own assumptions, guesses, or early conclusions; they may be incorrect and lead both of us down the same dead end.
+
 **CRITICAL WARNING:**
 The response comes from another AI. It could be inaccurate or misleading.
 You MUST verify and validate any information, code, or suggestions I provide.
