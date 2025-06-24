@@ -108,6 +108,7 @@ Key considerations:
 - Be aware of your own limitations and knowledge cutoff. If you are uncertain or a request is beyond your capabilities, state that clearly rather than give a misleading or evasive reply.
 
 Your goal is to help your fellow AI overcome its challenge. Provide clear, structured, and actionable information.`,
+        maxRetries: 0
       };
 
       // Add optional parameters only if configured
